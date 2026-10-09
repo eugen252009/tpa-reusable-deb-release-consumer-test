@@ -1,0 +1,24 @@
+name: Disposable cross-repository TPA release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  attestations: write
+  id-token: write
+
+jobs:
+  release:
+    permissions:
+      contents: write
+      attestations: write
+      id-token: write
+    uses: eugen252009/tpa-reusable-deb-release-builder-test/.github/workflows/reusable-deb-release.yml@4a3954c4a372e0f783c2b4d4aaf0ce0dd97f45fc
+    with:
+      config: .tpa-release.yml
+      tpa-repository: eugen252009/tpa-reusable-deb-release-builder-test
+      tpa-ref: 4a3954c4a372e0f783c2b4d4aaf0ce0dd97f45fc
+      tpa-version: "0.7.0"

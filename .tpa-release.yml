@@ -1,0 +1,33 @@
+schema_version: 1
+
+project:
+  name: tpa-release-smoke
+  test_command: bash -n scripts/payload.sh tests/install-package.sh && test -x scripts/payload.sh
+
+build:
+  command: |
+    install -d "$TPA_RELEASE_STAGE_ROOT/usr/local/bin"
+    install -m 0755 scripts/payload.sh "$TPA_RELEASE_STAGE_ROOT/usr/local/bin/tpa-release-smoke"
+
+package:
+  name: tpa-release-smoke
+  description: Disposable cross-repository release qualification package
+  maintainer: TPA Workflow Test <release-test@example.invalid>
+  depends: libc6
+  section: utils
+  priority: optional
+  stage_root: .release-stage
+  required_files:
+    - usr/local/bin/tpa-release-smoke
+  architectures:
+    amd64:
+      runner: ubuntu-24.04
+      runtime: native
+  qualification:
+    command: test "$(dpkg-deb -f "$TPA_RELEASE_PACKAGE_FILE" Package)" = tpa-release-smoke
+    install_command: bash tests/install-package.sh
+
+release:
+  notes_file: docs/release-notes.md
+
+reproducibility: true
