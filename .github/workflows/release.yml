@@ -16,9 +16,9 @@ jobs:
       contents: write
       attestations: write
       id-token: write
-    uses: eugen252009/tpa-reusable-deb-release-builder-test/.github/workflows/reusable-deb-release.yml@da10258bdddb54d5ecf1071cc3d585d9bc378be7
+    uses: eugen252009/tpa-reusable-deb-release-builder-test/.github/workflows/reusable-deb-release.yml@1af2524478a633eba21536d3a3e56e0bcd710049
     with:
       config: .tpa-release.yml
       tpa-repository: eugen252009/tpa-reusable-deb-release-builder-test
-      tpa-ref: da10258bdddb54d5ecf1071cc3d585d9bc378be7
+      tpa-ref: 1af2524478a633eba21536d3a3e56e0bcd710049
       tpa-version: "0.7.0"
